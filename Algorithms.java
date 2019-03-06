@@ -59,14 +59,30 @@ public class Algorithms {
 			if(!map2.containsKey(charInString2)) {
 				map2.put(charInString2, 0);
 			} else {
-				map1.put(charInString2, map2.get(charInString2) + 1);
+				map2.put(charInString2, map2.get(charInString2) + 1);
 			}
-			
-			map2.put(charInString2, 0);
 		}
 		
 		for(Character c: map1.keySet()) {
 			if(map1.get(c) != map2.get(c)) return false;
+		}
+		
+		return true;
+	}
+	
+	// 1.2 Solution - Given two strings, write a method to decide if one is a permutation of the other.
+	static public boolean permutation(String string1, String string2) {
+		if(string1.length() != string2.length()) return false;
+		
+		int[] charCount = new int[128];
+		
+		for(int i = 0; i < string1.length(); i++) {
+			charCount[string1.charAt(i)]++;
+		}
+		
+		for(int i = 0; i < string1.length(); i++) {
+			charCount[string2.charAt(i)]--;
+			if(charCount[string2.charAt(i)] < 0) return false;
 		}
 		
 		return true;
